@@ -21,7 +21,7 @@ for m = 0:1:5
     figure(1)
     grid on
     plot(d_TE,neff);
-    hold on 
+    hold on
     xlabel Spessore[m]
     ylabel neff
     xlim ([0 5e-6])
@@ -55,8 +55,8 @@ for m = 0:1:5
     d_TM =  (atan(gamma.*n_1^2./(k_x*n_2^2)) + atan(delta.*n_1^2./(k_x*n_2^2)) + m*pi)./(k_x);
     figure(3)
     plot(d_TM,neff);
-    hold on 
-    grid on 
+    hold on
+    grid on
     xlabel Thickness[m]
     ylabel neff
     xlim ([0 5e-6])
@@ -71,15 +71,15 @@ for m = 0:1:5
     omega_TM =  (3e8 * (atan(gamma.*n_1^2./(k_x*n_2^2)) + atan(delta.*n_1^2./(k_x*n_2^2)) + m*pi))./(d*sqrt(n_1^2-neff.^2));
     figure(4)
     plot(omega_TM,neff);
-    hold on 
-    grid on 
+    hold on
+    grid on
     title 'Plot di neff in funzione di omega per i modi TM'
     xlabel omega[rad/s]
     ylabel neff
     xlim ([0 2e16])
     ylim ([n_cladding n_core])
 end
- omega_TM =  (3e8 * (atan(gamma.*n_1^2./(k_x*n_2^2)) + atan(delta.*n_1^2./(k_x*n_2^2))))./(d*sqrt(n_1^2-neff.^2));
+omega_TM =  (3e8 * (atan(gamma.*n_1^2./(k_x*n_2^2)) + atan(delta.*n_1^2./(k_x*n_2^2))))./(d*sqrt(n_1^2-neff.^2));
 
  %CALCOLO DEL BETA
 beta_TE0=neff.*omega_TE./3e8;
@@ -90,11 +90,11 @@ plot(omega_TE,beta_TE0)
 hold on
 plot(omega_TE,beta_TEco)
 plot(omega_TE,beta_TEcl)
-grid on 
+grid on
 xlim ([0 10e15])
 title 'Plot di \beta(\omega) in funzione di \omega per i modi TE'
 xlabel \omega[rad/s]
-ylabel \beta(\omega) 
+ylabel \beta(\omega)
 
 beta_TM0=neff.*omega_TM./3e8;
 beta_TMco = n_core.*omega_TM./3e8;
@@ -104,18 +104,18 @@ plot(omega_TM,beta_TM0)
 hold on
 plot(omega_TM,beta_TMco)
 plot(omega_TM,beta_TMcl)
-grid on 
+grid on
 xlim ([0 10e15])
 title 'Plot di \beta(\omega) in funzione di \omega per i modi TM'
 xlabel \omega[rad/s]
-ylabel \beta(\omega) 
+ylabel \beta(\omega)
 
-%velocità di gruppo
+%velocitï¿½ di gruppo
 group_velocity_TE=1./(diff(beta_TE0)./(diff(omega_TE)));
 figure(7)
 plot(omega_TE(1:9999),group_velocity_TE)
-hold on 
-grid on 
+hold on
+grid on
 xlim ([0 4e16])
 title 'Plot dell indice di gruppo in funzione di \omega TE'
 xlabel \omega[rad/s]
@@ -125,8 +125,8 @@ ylabel 'indice di gruppo'
 group_index_TE=(3e8)./(group_velocity_TE);
 figure(8)
 plot(omega_TE(1:9999),group_index_TE)
-hold on 
-grid on 
+hold on
+grid on
 xlim ([0 4e16])
 title 'Plot dell indice di gruppo in funzione di \omega TE'
 xlabel \omega[rad/s]
@@ -279,10 +279,10 @@ k_0ERI = (2*pi/lambda);
 deltaERI = k_0ERI.*sqrt(neffERI.^2-n_3ERI^2);
 k_xERI = k_0ERI.*sqrt(n_1ERI^2-neffERI.^2);
 gammaERI = k_0ERI*sqrt(neffERI.^2 - n_2ERI^2);
-d_TEERI = (atan(gammaERI./k_xERI) + atan(deltaERI./k_xERI))./(k_xERI);
-omega_TEERI = (3e8*(atan(deltaERI./k_xERI)+atan(gammaERI./k_xERI)))./(d*sqrt(n_1^2-neff.^2));
-x_TMERI=linspace(-700e-9,200e-9,1e5);
-indiceTMERI = 5846; %500nm
+d_TMERI =  (atan(gammaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)) + atan(deltaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)))./(k_xERI);
+omega_TMERI =  (3e8 * (atan(gammaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)) + atan(deltaERI.*n_1ERI^2./(k_xERI*n_2ERI^2))))./(dERI*sqrt(n_1ERI^2-neffERI.^2));
+x_TMERI=linspace(-1000e-9,700e-9,1e5);
+indiceTMERI = 5274; %500nm
 n_eff_fixERI = neffERI(indiceTMERI);
 delta_fixERI = deltaERI(indiceTMERI);
 gamma_fixERI = gammaERI(indiceTMERI);
@@ -302,31 +302,44 @@ end
 
 figure(13)
 plot(abs(Hy_TMERI).^2,x_TMERI)
-hold on 
+hold on
 zzERI = zeros(1,1000);
 xERI = linspace(0,3.5,1000);
 plot(xERI,zzERI)
 plot(xERI,zzERI-dERI)
-title 'Plot del profilo del modo TM 500nm ERI'
+plot(xERI,zzERI-dERI/2)
+title 'Plot del profilo del modo TM 500nm ERI Hy'
 grid on
 
-omega = 3e8*2*pi/lambda;
-eps = 
-beta_fixERI = 
+omega_TEERI = 3e8*2*pi/lambda;
+epsi0 = 8.9e-12;
 
 for i=1:numel(Hy_TMERI)
     if(x_TMERI(i)>0)
-        Ex_TMERI(i)= (kx_fixERI.*Hy_TMERI(i))./((1.216e15)*(8.854187e-12)*n_claddingERI^2);
+        Ex_TMERI(i)= (kx_fixERI.*Hy_TMERI(i))./(omega_TEERI*epsi0*n_claddingERI^2);
     end
     if(x_TMERI(i)<=0 && x_TMERI(i)>=-dERI)
-        Ex_TMERI(i)= (kx_fixERI.*Hy_TMERI(i))./((1.216e15)*(8.854187e-12)*n_coreERI^2);
+        Ex_TMERI(i)= (kx_fixERI.*Hy_TMERI(i))./(omega_TEERI*epsi0*n_coreERI^2);
     end
     if(x_TMERI(i) < -dERI)
-        Ex_TMERI(i)= (kx_fixERI.*Hy_TMERI(i))./((1.216e15)*(8.854187e-12)*n_claddingERI^2);
+        Ex_TMERI(i)= (kx_fixERI.*Hy_TMERI(i))./(omega_TEERI*epsi0*n_claddingERI^2);
     end
 end
 
+figure(14)
+plot(x_TMERI,abs(Ex_TMERI).^2)
+hold on
+zzERI = zeros(1,1000);
+xERI = linspace(0,5000,1000);
+plot(zzERI,xERI)
+plot(zzERI-dERI,xERI)
+title 'Plot del profilo del modo TM 500nm ERI Hy'
+grid on
 
-
-
-
+for i=1:numel(Ey_TE)
+    for j=1:numel(Ex_TMERI)
+        prodot(i,j)=Ey_TE(i)*Ex_TMERI(j);
+    end
+end
+figure (15)
+imagesc(prodot)
