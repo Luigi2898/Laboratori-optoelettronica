@@ -174,7 +174,7 @@ grid on
 
 %profilo di campo TM 220nm
 indiceTM220 = 2994;
-x_TM=linspace(-700e-9,700e-9,1e3);
+x_TM=linspace(-1100e-9,1100e-9,1e3);
 n_eff_fix = neff(indiceTM220);
 delta_fix = delta(indiceTM220);
 gamma_fix = gamma(indiceTM220);
@@ -236,7 +236,7 @@ grid on
 
 %profilo di campo TM 150nm
 indiceTM150 = 834;
-x_TM=linspace(-700e-9,700e-9,1e3);
+x_TM=linspace(-750e-9,750e-9,1e3);
 n_eff_fix = neff(indiceTM150);
 delta_fix = delta(indiceTM150);
 gamma_fix = gamma(indiceTM150);
@@ -281,7 +281,7 @@ k_xERI = k_0ERI.*sqrt(n_1ERI^2-neffERI.^2);
 gammaERI = k_0ERI*sqrt(neffERI.^2 - n_2ERI^2);
 d_TMERI =  (atan(gammaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)) + atan(deltaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)))./(k_xERI);
 omega_TMERI =  (3e8 * (atan(gammaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)) + atan(deltaERI.*n_1ERI^2./(k_xERI*n_2ERI^2))))./(dERI*sqrt(n_1ERI^2-neffERI.^2));
-x_TMERI=linspace(-1000e-9,700e-9,1e3);
+x_TMERI=linspace(-1000e-9,500e-9,1e3);
 indiceTMERI = 5274; %500nm
 n_eff_fixERI = neffERI(indiceTMERI);
 delta_fixERI = deltaERI(indiceTMERI);
