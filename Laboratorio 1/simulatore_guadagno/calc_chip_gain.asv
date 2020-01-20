@@ -1,0 +1,17 @@
+Lsoa=input('Choose the length of a SOA (in mm)? (insert 0 to exit)');
+ifig=4;
+
+while Lsoa>0
+    % make a plot of the spectrum of G0
+    figure(ifig)
+    hold on
+    for icurr=1:length(I)
+        G0_dB(icurr,:)=10*log10(exp(out_gain(icurr).gnet*Lsoa/10)); % chip gain in dB
+        plot(1.24./htw*1000,G0_dB(icurr,:));
+    end   
+
+    xlabel('Wavelength  (nm)')
+    ylabel('Chip gain G_0  (dB) ')
+    title(['Current density in kA/cm^{2} ', num2str(J), '     L_{SOA}=',num2str(Lsoa),'mm')
+    Lsoa=input('Choose the length of a SOA (in mm)? (insert 0 to exit)');
+    

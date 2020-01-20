@@ -1,0 +1,53 @@
+%Dati per il calcolo delle Efc, Efv e guadagno nel caso del quantum well
+
+% Materiali: InGaAsP lattice matched on InP.  
+% Parametri materiale impostati da utente
+
+
+material.mstar = 4.814110900815127e-02; %mc/m0 nel well: massa efficace elettrone in BC nel well (NB: normalizzata rispetto a massa elettrone libero)
+material.m2star = 6.060839795626114e-02; %mc/m0 nella barriera:  massa efficace elettrone in BC nella barriera (NB: normalizzata rispetto a massa elettrone libero)
+
+material.mstarhh =  4.319908933459050e-01; %mhh/m0 nel well per le lacune
+material.m2starhh = 5.172502462570736e-01; %mhh/m0 nella barriera per le lacune
+
+material.Eg = 0.775437; %eV - energy gap della  well
+material.W =10; %nm - spessore d del QW
+
+material.T = 300; %K - temperatura
+
+material.N0 = 1; %Numero totale di wells
+
+material.Ebulk = 0.162; %ev - altezza della buca nella banda di conduzione
+
+material.Ebulkh =0.108; %ev - altezza buca nella banda di valenza
+
+
+
+%%-------- DO NOT CHANGE THE PARAMETERS BELOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!----------------------------------------
+
+
+
+material.totlen=150; %nm
+
+material.deltaSO = 0.34; %ev - SO band for well material (GaAS in this case) da ricalcolare per il materiale in esame 
+
+material.tauin=1e-13; %sec - Polarisation dephasing time
+material.tau_nr=2; %in ns
+
+material.cp=1; %per il modo TE
+
+material.deltaGaAS=0.34; %eV
+
+material.nr = 3.5;
+
+material.gammaqw = 0.0123; %fattore di confinamento per ogni singolo quantum well
+
+material.alfai = 7; %[cm^-1]
+
+material.gammabarr = 0.17; %fattore di confinamento nella barriera
+
+material.kn = 2e-18; %coefficiente IVBA per elettroni [cm^2]
+
+material.kp = 20e-18; %coefficiente IVBA per lacune [cm^2]
+
+material.xi = 1e-8; %coefficiente per la rinormalizzazione dell'energy gap [eV*cm]
