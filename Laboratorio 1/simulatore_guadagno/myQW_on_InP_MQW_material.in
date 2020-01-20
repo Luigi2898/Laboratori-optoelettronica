@@ -10,9 +10,9 @@ material.m2star = 6.061094631682951e-02; %mc/m0 nella barriera:  massa efficace 
 material.mstarhh =  4.320090569766166e-01; %mhh/m0 nel well per le lacune
 material.m2starhh = 5.172719947304864e-01; %mhh/m0 nella barriera per le lacune
 
-material.Eg = 0.775437; %eV - energy gap della  well
+material.Eg = 0.923001; %eV - energy gap della  well
 
-material.W =10; %nm - spessore d del QW
+material.W = 20; %nm - spessore d del QW
 
 material.T = 300; %K - temperatura
 
