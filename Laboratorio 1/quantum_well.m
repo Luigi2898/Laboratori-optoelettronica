@@ -23,8 +23,8 @@ Eh = linspace(U2h, U1h, 10000);
 gammah = (sqrt(2*m_h)./h_t).*sqrt(Eh - U2h);
 deltah = (sqrt(2*m_h)./h_t).*sqrt(Eh - U2h);
 k_xh = (sqrt(2*m_h)./h_t).*sqrt(U1h - Eh);
-d0h = (1./k_xh).*(atan(gammah./k_xh)+ atan(deltah./k_xh)) .* 40.02499; %nm
-d1h = (1./k_xh).*(atan(gammah./k_xh)+ atan(deltah./k_xh)+pi) .* 40.02499; %nm
+d0h = (1./k_xh).*(atan(gammah./k_xh)+ atan(deltah./k_xh)); %nm
+d1h = (1./k_xh).*(atan(gammah./k_xh)+ atan(deltah./k_xh)+pi); %nm
 
 figure(11)
 plot(d0e,Ee,'r',d1e,Ee,'b')
