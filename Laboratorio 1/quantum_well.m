@@ -30,11 +30,13 @@ figure(11)
 plot(d0e,Ee,'r',d1e,Ee,'b')
 title('E vs d - ELETTRONI')
 grid on
+xlim([0 100])
 
 figure(22)
 plot(d0h,Eh,'r',d1h,Eh,'b')
 title('E vs d - LACUNE')
 grid on
+xlim([0 100])
 
 d = 10e-9;
 E1e = 2.0875e-20;
