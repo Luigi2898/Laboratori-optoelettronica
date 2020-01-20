@@ -1,16 +1,17 @@
 %Dati per il calcolo delle Efc, Efv e guadagno nel caso del quantum well
 
-% Materiali: InGaAsP lattice matched on InP.  
+% Materiali: InGaAsP lattice matched on InP.
 % Parametri materiale impostati da utente
 
 
-material.mstar = 4.814110900815127e-02; %mc/m0 nel well: massa efficace elettrone in BC nel well (NB: normalizzata rispetto a massa elettrone libero)
-material.m2star = 6.060839795626114e-02; %mc/m0 nella barriera:  massa efficace elettrone in BC nella barriera (NB: normalizzata rispetto a massa elettrone libero)
+material.mstar = 4.814313316500165e-02; %mc/m0 nel well: massa efficace elettrone in BC nel well (NB: normalizzata rispetto a massa elettrone libero)
+material.m2star = 6.061094631682951e-02; %mc/m0 nella barriera:  massa efficace elettrone in BC nella barriera (NB: normalizzata rispetto a massa elettrone libero)
 
-material.mstarhh =  4.319908933459050e-01; %mhh/m0 nel well per le lacune
-material.m2starhh = 5.172502462570736e-01; %mhh/m0 nella barriera per le lacune
+material.mstarhh =  4.320090569766166e-01; %mhh/m0 nel well per le lacune
+material.m2starhh = 5.172719947304864e-01; %mhh/m0 nella barriera per le lacune
 
 material.Eg = 0.775437; %eV - energy gap della  well
+
 material.W =10; %nm - spessore d del QW
 
 material.T = 300; %K - temperatura
@@ -29,7 +30,7 @@ material.Ebulkh =0.108; %ev - altezza buca nella banda di valenza
 
 material.totlen=150; %nm
 
-material.deltaSO = 0.34; %ev - SO band for well material (GaAS in this case) da ricalcolare per il materiale in esame 
+material.deltaSO = 0.34; %ev - SO band for well material (GaAS in this case) da ricalcolare per il materiale in esame
 
 material.tauin=1e-13; %sec - Polarisation dephasing time
 material.tau_nr=2; %in ns
