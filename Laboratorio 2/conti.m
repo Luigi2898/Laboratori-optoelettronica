@@ -7,14 +7,14 @@ clear variables
 r_1=0.3;
 r_2=0.9;
 La=900e-4;
-alpha_m = (1/La)*(log(1/(sqrt(r_1*r_2)))); % rircordati che � cmetri^-1
-alpha_i = 6; %unit� di misura cmetri^-1
-gamma_per_g_threshold=alpha_m+alpha_i;
-N_tr=1.8e18;%elettroni per centrimetro cubo
+alpha_m_fix = (1/La)*(log(1/(sqrt(r_1*r_2)))); % rircordati che � cmetri^-1
+alpha_i_fix = 6; %unit� di misura cmetri^-1
+gamma_per_g_threshold = alpha_m_fix + alpha_i_fix;
+N_tr = 1.8e18;%elettroni per centrimetro cubo
 a_0 =  5.34e-16; %sono cm^2
 guadagno_modale = a_0 * gamma_per_g_threshold;
 gamma = 0.06;
-N_th=N_tr + ((alpha_i+alpha_m)/(gamma * a_0));%elettroni per centrimetro cubo
+N_th=N_tr + ((alpha_i_fix + alpha_m_fix) / (gamma * a_0));%elettroni per centrimetro cubo
 V = (900e-6)*(100e-10)*(2.5e-6); %metri al cubo
 V = V*1e6;%cm al cubo
 q = 1.60217e-19;
@@ -33,7 +33,7 @@ La=linspace(300e-4,1500e-4,10000);
 alpha_m = (1./La).*(log(1/(sqrt(r_1*r_2)))); % rircordati che � cmetri^-1
 alpha_i = 3; %unit� di misura cmetri^-1
 gamma_per_g_threshold=alpha_m+alpha_i;
-N_tr=1.8e18;%elettroni per centrimetro cubo
+N_tr = 1.8e18;%elettroni per centrimetro cubo
 a_0 =  1e-16; %sono cm^2
 guadagno_modale = a_0 .* gamma_per_g_threshold;
 gamma = 0.06;
@@ -116,3 +116,10 @@ plot(Ibias, f_3dB, '-o')
 grid on
 
 %Banda di modulazione massima
+n_g = 4.2;
+c = 3e8;
+v_g = c/n_g;
+tau_p = 1/(v_g * (alpha_i_fix * 10^2 + alpha_m_fix * 10^2));
+banda_max_ideale = sqrt(2)/(tau_p * 2 * pi);
+
+%TODO simulare per correnti di bias maggiori! Così si vede il limite di banda anche nel grafico e posso confrontare il teorico con il simulato
