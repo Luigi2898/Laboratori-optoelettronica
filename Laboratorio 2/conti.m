@@ -1,3 +1,7 @@
+clc
+close all
+clear variables
+
 %esercizio 1
 %%
 r_1=0.3;
@@ -50,10 +54,10 @@ title('Plot della corrente di threshold in funzione della lunghezza')
 xlabel('La [cm]')
 ylabel('I_{th} [A]')
 
-eta_d = eta_i .* alpha_m /(alpha_i + alpha_m );
+eta_d = eta_i .* alpha_m ./(alpha_i + alpha_m );
 figure(2)
 plot(La,eta_d,'r')
 grid on
-title('Plot del\'efficienza differenziale in funzione della lunghezza')
+title('Plot efficienza differenziale in funzione della lunghezza')
 xlabel('La [cm]')
 ylabel('I_{th} [A]')
