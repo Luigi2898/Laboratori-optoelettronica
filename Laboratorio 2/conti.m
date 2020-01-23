@@ -55,9 +55,49 @@ xlabel('La [cm]')
 ylabel('I_{th} [A]')
 
 eta_d = eta_i .* alpha_m ./(alpha_i + alpha_m );
+
 figure(2)
 plot(La,eta_d,'r')
 grid on
 title('Plot efficienza differenziale in funzione della lunghezza')
 xlabel('La [cm]')
 ylabel('I_{th} [A]')
+
+%Esercizio 3
+%riportare sullo stesso grafico le diverse risposte
+
+h1_05 = openfig('esercizio_3_punto_6__1_05_IM.fig');
+t1_05 = findobj(h1_05,'type', 'line');
+
+x1_05 = get(t1_05,'XData');
+y1_05 = get(t1_05,'YData');
+
+h2 = openfig('esercizio_3_punto_6__2_IM.fig');
+t2 = findobj(h2,'type', 'line');
+
+x2 = get(t2,'XData');
+y2 = get(t2,'YData');
+
+h6 = openfig('esercizio_3_punto_6__6_IM.fig');
+t6 = findobj(h6,'type', 'line');
+
+x6 = get(t6,'XData');
+y6 = get(t6,'YData');
+
+h10 = openfig('esercizio_3_punto_6__10_IM.fig');
+t10 = findobj(h10,'type', 'line');
+
+x10 = get(t10,'XData');
+y10 = get(t10,'YData');
+
+figure(3)
+semilogx(x1_05, y1_05, 'b')
+grid on
+hold on
+semilogx(x2, y2, 'r')
+semilogx(x6, y6, 'g')
+semilogx(x10, y10, 'y')
+legend('I_{bias}/I_{th} = 1.05','I_{bias}/I_{th} = 2','I_{bias}/I_{th} = 6','I_{bias}/I_{th} = 10')
+title('Confronto tra le risposte IM per diverse correnti di bias')
+xlabel('Risposta IM [dB]')
+ylabel('Frequenza [GHz]')
