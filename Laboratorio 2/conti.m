@@ -114,3 +114,5 @@ f_3dB = [f1_05_3dB f2_3dB f6_3dB f10_3dB];
 figure(4)
 plot(Ibias, f_3dB, '-o')
 grid on
+
+%Banda di modulazione massima
