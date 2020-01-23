@@ -24,15 +24,7 @@ I_th = ((A*N_th + B*N_th^2 + C*N_th^3))*((q*V)/(eta_i));
 %ci manca la linewidth
 
 %esercizio 2
-%%
-clc
-clear all
-close all
 
-%sarebbe interessante plottare I_th come funzione di La
-%esercizio 1
-r_1=0.3;
-r_2=0.9;
 La=linspace(300e-4,1500e-4,10000);
 alpha_m = (1./La).*(log(1/(sqrt(r_1*r_2)))); % rircordati che � cmetri^-1
 alpha_i = 3; %unit� di misura cmetri^-1
@@ -58,10 +50,10 @@ title('Plot della corrente di threshold in funzione della lunghezza')
 xlabel('La [cm]')
 ylabel('I_{th} [A]')
 
-eta_d = eta_i * alpha_m /(alpha_i + alpha_m );
-
-%%
-%esercizio 3
-clc
-clear all
-close all
+eta_d = eta_i .* alpha_m /(alpha_i + alpha_m );
+figure(2)
+plot(La,eta_d,'r')
+grid on
+title('Plot del\'efficienza differenziale in funzione della lunghezza')
+xlabel('La [cm]')
+ylabel('I_{th} [A]')
