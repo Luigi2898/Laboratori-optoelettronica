@@ -101,3 +101,16 @@ legend('I_{bias}/I_{th} = 1.05','I_{bias}/I_{th} = 2','I_{bias}/I_{th} = 6','I_{
 title('Confronto tra le risposte IM per diverse correnti di bias')
 xlabel('Risposta IM [dB]')
 ylabel('Frequenza [GHz]')
+
+%banda come funzione della corrente di bias
+f1_05_3dB = x1_05(20);
+f2_3dB = x2(89);
+f6_3dB = x6(186);
+f10_3dB = x10(232);
+I_th_fix = 9.677; %mA
+Ibias = [I_th_fix*1.05 I_th_fix*2 I_th_fix*6 I_th_fix*10];
+f_3dB = [f1_05_3dB f2_3dB f6_3dB f10_3dB];
+
+figure(4)
+plot(Ibias, f_3dB, '-o')
+grid on
