@@ -122,4 +122,7 @@ v_g = c/n_g;
 tau_p = 1/(v_g * (alpha_i_fix * 10^2 + alpha_m_fix * 10^2));
 banda_max_ideale = sqrt(2)/(tau_p * 2 * pi);
 
-%TODO Calcolare la banda teorica date le diverse correnti di bias e confrontare con il risultato della simulazione
+%TODO Calcolare la banda teorica date le diverse correnti di bias e confrontare con il risultato delle simulazioni
+
+%DOING
+
