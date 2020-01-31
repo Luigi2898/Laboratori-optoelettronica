@@ -2,8 +2,6 @@ clc
 clear all
 close all
 
-%FIXME Fare i disegni delle intensità normalizzate rispetto al massimo, non assolute, non conosco il valore del campo in 0
-
 n_core=3.475;
 n_cladding=1.44;
 neff = linspace(n_cladding,n_core,1e4);
@@ -166,7 +164,8 @@ end
 zz = zeros(1,1000);
 x = linspace(0,2.7,1000);
 figure(9)
-plot(abs(Ey_TE).^2, x_TE)
+int_norm_Ey_TE = abs(Ey_TE).^2./max(abs(Ey_TE).^2);
+plot(int_norm_Ey_TE, x_TE)
 hold on
 plot(x,zz)
 plot(x,zz-d)
@@ -194,11 +193,12 @@ for i=1:numel(x_TM)
     end
 end
 
+int_norm_Hy_TM = abs(Hy_TM).^2./max(abs(Hy_TM).^2);
 
 figure(10)
 zz = zeros(1,1000);
 x = linspace(0,11,1000);
-plot(abs(Hy_TM).^2, x_TM)
+plot(int_norm_Hy_TM, x_TM)
 hold on
 plot(x,zz)
 plot(x,zz-d)
@@ -227,8 +227,11 @@ for i=1:numel(x_TE)
 end
 zz = zeros(1,1000);
 x = linspace(0,2,1000);
+
+int_norm_Ey_TE = abs(Ey_TE).^2./max(abs(Ey_TE).^2);
+
 figure(11)
-plot(abs(Ey_TE).^2, x_TE)
+plot(int_norm_Ey_TE, x_TE)
 hold on
 plot(x,zz)
 plot(x,zz-d)
@@ -256,11 +259,12 @@ for i=1:numel(x_TM)
     end
 end
 
+int_norm_Hy_TM = abs(Hy_TM).^2./max(abs(Hy_TM).^2);
 
 figure(12)
 zz = zeros(1,1000);
 x = linspace(0,3,1000);
-plot(abs(Hy_TM).^2, x_TM)
+plot(abs(int_norm_Hy_TM, x_TM)
 hold on
 plot(x,zz)
 plot(x,zz-d)
@@ -302,8 +306,10 @@ for i=1:numel(x_TMERI)
     end
 end
 
+int_norm_Hy_TMERI = abs(Hy_TMERI).^2./max(abs(Hy_TMERI).^2);
+
 figure(13)
-plot(abs(Hy_TMERI).^2,x_TMERI)
+plot(int_norm_Hy_TMERI,x_TMERI)
 hold on
 zzERI = zeros(1,1000);
 xERI = linspace(0,3.5,1000);
@@ -328,8 +334,10 @@ for i=1:numel(Hy_TMERI)
     end
 end
 
+int_norm_Ex_TMERI = abs(Ex_TMERI).^2./max(abs(Ex_TMERI).^2);
+
 figure(14)
-plot(x_TMERI,abs(Ex_TMERI).^2)
+plot(x_TMERI,int_norm_Ex_TMERI)
 hold on
 zzERI = zeros(1,1000);
 xERI = linspace(0,5000,1000);
