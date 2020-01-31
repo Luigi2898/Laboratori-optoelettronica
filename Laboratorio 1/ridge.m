@@ -170,7 +170,7 @@ hold on
 plot(x,zz)
 plot(x,zz-d)
 title 'Plot del profilo del modo TE fondamentale 220nm'
-xlim([0 2.7])
+xlim([0 1])
 grid on
 
 %profilo di campo TM 220nm
@@ -179,7 +179,7 @@ x_TM=linspace(-1100e-9,1100e-9,1e3);
 n_eff_fix = neff(indiceTM220);
 delta_fix = delta(indiceTM220);
 gamma_fix = gamma(indiceTM220);
-kx_fix = k_x(indiceTM220)
+kx_fix = k_x(indiceTM220);
 B=-(delta_fix*n_1^2)/(n_2^2*kx_fix);%porco il cazzo
 for i=1:numel(x_TM)
     if(x_TM(i)>0)
@@ -203,7 +203,7 @@ hold on
 plot(x,zz)
 plot(x,zz-d)
 title 'Plot del profilo del modo TM fondamentale 220nm'
-xlim([0 11])
+xlim([0 1])
 grid on
 
 %profilo di campo TE 150nm
@@ -236,7 +236,7 @@ hold on
 plot(x,zz)
 plot(x,zz-d)
 title 'Plot del profilo del modo TE fondamentale 150nm'
-xlim([0 2])
+xlim([0 1])
 grid on
 
 %profilo di campo TM 150nm
@@ -245,7 +245,7 @@ x_TM=linspace(-750e-9,750e-9,1e3);
 n_eff_fix = neff(indiceTM150);
 delta_fix = delta(indiceTM150);
 gamma_fix = gamma(indiceTM150);
-kx_fix = k_x(indiceTM150)
+kx_fix = k_x(indiceTM150);
 B=-(delta_fix*n_1^2)/(n_2^2*kx_fix);%porco il cazzo
 for i=1:numel(x_TM)
     if(x_TM(i)>0)
@@ -264,12 +264,12 @@ int_norm_Hy_TM = abs(Hy_TM).^2./max(abs(Hy_TM).^2);
 figure(12)
 zz = zeros(1,1000);
 x = linspace(0,3,1000);
-plot(abs(int_norm_Hy_TM, x_TM)
+plot(int_norm_Hy_TM, x_TM)
 hold on
 plot(x,zz)
 plot(x,zz-d)
 title 'Plot del profilo del modo TM fondamentale 150nm'
-xlim([0 3])
+xlim([0 1])
 grid on
 
 %Metodo ERI per analisi ridge
@@ -318,6 +318,7 @@ plot(xERI,zzERI-dERI)
 plot(xERI,zzERI-dERI/2)
 title 'Plot del profilo del modo TM 500nm ERI Hy'
 grid on
+xlim([0 1])
 
 omega_TEERI = 3e8*2*pi/lambda;
 epsi0 = 8.9e-12;
@@ -345,6 +346,7 @@ plot(zzERI,xERI)
 plot(zzERI-dERI,xERI)
 title 'Plot del profilo del modo TM 500nm ERI Hy'
 grid on
+ylim([0 1])
 
 for i=1:numel(Ey_TE)
     for j=1:numel(Ex_TMERI)
