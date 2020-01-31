@@ -2,6 +2,8 @@ clc
 clear all
 close all
 
+%FIXME Fare i disegni delle intensità normalizzate rispetto al massimo, non assolute, non conosco il valore del campo in 0
+
 n_core=3.475;
 n_cladding=1.44;
 neff = linspace(n_cladding,n_core,1e4);
