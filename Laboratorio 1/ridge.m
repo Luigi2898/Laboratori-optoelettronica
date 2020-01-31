@@ -343,5 +343,7 @@ for i=1:numel(Ey_TE)
         prodot(i,j)=Ey_TE(i)*Ex_TMERI(j);
     end
 end
+%FIXME Aggiungere contorno guida (matrice con tutti 0 e 100 (da vedere in base al colore) dove voglio vedere il contorno
+%FIXME Sistemare in modo da vederla simmetrica
 figure (15)
 imagesc(prodot)
