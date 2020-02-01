@@ -187,9 +187,10 @@ banda_max_eps = sqrt(2)*(1/(1+(gamma * epsilon/a_0)))/(tau_p * 2 * pi);
 
 %esercizio 5
 P_bias = 5; %mW
-I_bias = 22.2; %mA
+I_bias = 22.2; %mA 4.04 * i_th
 P_0 = 1; %mW
 P_1 = 10; %mW
-I_0 = 8.7; %mA
-I_1 = 36.6; %mA
+I_0 = 8.7; %mA 1.58 * I_th
+I_1 = 36.6; %mA 6.65 * I_th
 I_th_NRZ = 5.5001; %mA
+f_3dB = 4.0981; %GHz
