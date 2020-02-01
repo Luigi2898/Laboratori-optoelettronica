@@ -1,11 +1,20 @@
-function [] = eyediagram(outputpower, bitrate, time, x)
+function [] = eyediagram(outputpower, numb, x)
 
-  T_bit = 1/bitrate;
-  numb = ceil(numel(time)/T_bit);
+  inter = floor(numel(outputpower)/numb);
 
-  for j = 0 : numb : numel(time)
-    figure(99)
-    plot(time(j : numb + j), outputpower(j : numb + j))
-    hold on
+  i = 1;
+  for j = 1 : inter : numel(outputpower)
+    if (inter + j < numel(outputpower))
+      %pause
+      figure(x)
+      plot([1 : 1 : inter + 1], outputpower(j : inter + j))
+      hold on
+      i = i + 1
+    end
   end
+  figure(x)
+  grid on
+
 end
+
+%FIXME partire dalla transizione forse, non da dove inizia
