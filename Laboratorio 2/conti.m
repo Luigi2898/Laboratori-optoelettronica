@@ -127,6 +127,7 @@ Np = 0; %FIXME Calcolare la densità di fotoni come funzione della corrente di b
 damping = v_g * a_0 * Np + one_ov_tau_Dn;
 
 %esercizio 3.4 (ricalcolo con epsilon = 1.5e-14)
+epsilon = 1.5e-14;
 h1_05 = openfig('esercizio_3_punto_4__1_05_IM.fig');
 t1_05 = findobj(h1_05,'type', 'line');
 
@@ -182,4 +183,13 @@ n_g = 4.2;
 c = 3e8;
 v_g = c/n_g;
 tau_p = 1/(v_g * (alpha_i_fix * 10^2 + alpha_m_fix * 10^2));
-banda_max_ideale = sqrt(2)/(tau_p * 2 * pi);
+banda_max_eps = sqrt(2)*(1/(1+(gamma * epsilon/a_0)))/(tau_p * 2 * pi);
+
+%esercizio 5
+P_bias = 5; %mW
+I_bias = 22.2; %mA
+P_0 = 1; %mW
+P_1 = 10; %mW
+I_0 = 8.7; %mA
+I_1 = 36.6; %mA
+I_th_NRZ = 5.5001; %mA
