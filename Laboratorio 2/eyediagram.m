@@ -1,14 +1,13 @@
-function [] = eyediagram(outputpower, numb, x)
+function [] = eyediagram(outputpower, time, numb, bitrate, x)
 
-  n = ceil(numb/2);
-  inter = floor(numel(outputpower)/n);
-
+  Tbit = 1e9/bitrate;
+  inter = ceil(Tbit/(time(2) - time(1)));
+  %pause
   i = 1;
   for j = 1 : inter : numel(outputpower)
     if (inter + j < numel(outputpower))
-      pause
       figure(x)
-      plot([1 : 1 : inter + 1], outputpower(j : inter + j))
+      plot([1 : 1 : floor(1.5 * inter)], outputpower(j : floor(1.5 * inter) + j - 1))
       hold on
       i = i + 1
     end
