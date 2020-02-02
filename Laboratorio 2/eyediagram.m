@@ -1,11 +1,12 @@
 function [] = eyediagram(outputpower, numb, x)
 
-  inter = floor(numel(outputpower)/numb);
+  n = ceil(numb/2);
+  inter = floor(numel(outputpower)/n);
 
   i = 1;
   for j = 1 : inter : numel(outputpower)
     if (inter + j < numel(outputpower))
-      %pause
+      pause
       figure(x)
       plot([1 : 1 : inter + 1], outputpower(j : inter + j))
       hold on

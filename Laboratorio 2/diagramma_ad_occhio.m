@@ -1,5 +1,5 @@
-%clear all;
-%close all;
+clear all;
+close all;
 clc;
 
 obj = openfig('esercizio_4_NRZ_1');
