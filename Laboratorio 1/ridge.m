@@ -273,10 +273,10 @@ xlim([0 1])
 
 omega_TEERI = 3e8*2*pi/lambda;
 epsi0 = 8.9e-12;
-Ex_TMERI = (kx_fixERI.*Hy_TMERI./(omega_TEERI*epsi0*n_claddingERI^2);
-%Ex_TMERI(find(x_TMERI > 0))=(kx_fixERI.*Hy_TMERI(find(x_TMERI > 0)))./(omega_TEERI*epsi0*n_claddingERI^2);
-%Ex_TMERI(find(x_TMERI<=0 & x_TMERI>=-dERI))= (kx_fixERI.*Hy_TMERI(find(x_TMERI<=0 & x_TMERI>=-dERI)))./(omega_TEERI*epsi0*n_coreERI^2);
-%Ex_TMERI(find(x_TMERI < -dERI))= (kx_fixERI.*Hy_TMERI(find(x_TMERI < -dERI)))./(omega_TEERI*epsi0*n_claddingERI^2);
+%Ex_TMERI = (kx_fixERI.*Hy_TMERI)./(omega_TEERI*epsi0*n_claddingERI^2);
+Ex_TMERI(find(x_TMERI > 0))=(kx_fixERI.*Hy_TMERI(find(x_TMERI > 0)))./(omega_TEERI*epsi0*n_claddingERI^2);
+Ex_TMERI(find(x_TMERI<=0 & x_TMERI>=-dERI))= (kx_fixERI.*Hy_TMERI(find(x_TMERI<=0 & x_TMERI>=-dERI)))./(omega_TEERI*epsi0*n_coreERI^2);
+Ex_TMERI(find(x_TMERI < -dERI))= (kx_fixERI.*Hy_TMERI(find(x_TMERI < -dERI)))./(omega_TEERI*epsi0*n_claddingERI^2);
 
 int_norm_Ex_TMERI = abs(Ex_TMERI).^2./max(abs(Ex_TMERI).^2);
 
