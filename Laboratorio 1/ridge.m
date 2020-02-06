@@ -1,3 +1,4 @@
+tic
 clc
 clear all
 close all
@@ -15,7 +16,6 @@ k_0=(2*pi/lambda);
 delta = k_0.*sqrt(neff.^2-n_3^2);
 k_x = k_0.*sqrt(n_1^2-neff.^2);
 gamma = k_0*sqrt(neff.^2 - n_2^2);
-
 for m = 0:1:5
     d_TE = (atan(gamma./k_x) + atan(delta./k_x) + m*pi)./(k_x);
     figure(1)
@@ -29,11 +29,7 @@ for m = 0:1:5
     title 'Plot di neff in funzione dello spessore per i modi TE'
 end
 d_TE = (atan(gamma./k_x) + atan(delta./k_x))./(k_x);
-%omega_TE = (3e8*sqrt(delta.^2+n_3^2*k_0^2))./(neff);
-%d_TE=((atan(sqrt((neff.^2 - n_2^2)./(sqrt(n_1^2 - neff.^2)))))+(atan(sqrt((neff.^2 - n_3^2)./(sqrt(n_1^2 - neff.^2))))))./(k_0*sqrt(n_1^2 - neff.^2));
-%d_TE_1=(pi+(atan(sqrt((neff.^2 - n_2^2)./(sqrt(n_1^2 - neff.^2)))))+(atan(sqrt((neff.^2 - n_3^2)./(sqrt(n_1^2 - neff.^2))))))./(k_0*sqrt(n_1^2 - neff.^2));
-%d_TE_2=(2*pi+(atan(sqrt((neff.^2 - n_2^2)./(sqrt(n_1^2 - neff.^2)))))+(atan(sqrt((neff.^2 - n_3^2)./(sqrt(n_1^2 - neff.^2))))))./(k_0*sqrt(n_1^2 - neff.^2));
-%omega_TE=3*10^8 * (((atan(sqrt((neff.^2 - n_2^2)./(sqrt(n_1^2 - neff.^2)))))+(atan(sqrt((neff.^2 - n_3^2)./(sqrt(n_1^2 - neff.^2))))))./(d.*sqrt(n_1^2 -neff.^2)));
+
 for m = 0:1:5
     omega_TE = (3e8*(atan(delta./k_x)+atan(gamma./k_x) + m*pi))./(d*sqrt(n_1^2-neff.^2));
     figure(2)
@@ -47,10 +43,6 @@ for m = 0:1:5
     ylim ([n_cladding n_core])
 end
 omega_TE = (3e8*(atan(delta./k_x)+atan(gamma./k_x)))./(d*sqrt(n_1^2-neff.^2));
-%per modo TM
-%d_TM=((atan((n_1^2 - neff.^2).*(((n_3^2 - neff.^2)+(n_2^2 -neff.^2))./((n_1^2-neff.^2).^2- ((n_2^2-neff.^2).*(n_3^2-(neff.^2))))))))./(k_0*(n_1^2-neff.^2));
-%d_TM=((atan((k_0.*sqrt(neff.^2 -n_2^2).*n_1^2)./(k_0.*sqrt(n_1^2 - neff.^2).*n_2^2)))+atan((k_0.*sqrt(neff.^2-n_3^2).*n_1^2)./(k_0.*sqrt(n_1^2 - neff.^2).*n_2^2)))./(k_0.*sqrt(n_1^2 - neff.^2));
-%omega_TM=3*10^8*((atan((k_0.*sqrt(neff.^2 -n_2^2).*n_1^2)./(k_0.*sqrt(n_1^2 - neff.^2).*n_2^2)))+atan((k_0.*sqrt(neff.^2-n_3^2).*n_1^2)))./(d.*sqrt(n_1^2 -neff.^2));
 for m = 0:1:5
     d_TM =  (atan(gamma.*n_1^2./(k_x*n_2^2)) + atan(delta.*n_1^2./(k_x*n_2^2)) + m*pi)./(k_x);
     figure(3)
@@ -117,7 +109,7 @@ plot(omega_TE(1:9999),group_velocity_TE)
 hold on
 grid on
 xlim ([0 4e16])
-title 'Plot dell indice di gruppo in funzione di \omega TE'
+title 'Plot della velocità di gruppo in funzione di \omega TE'
 xlabel \omega[rad/s]
 ylabel 'indice di gruppo'
 
@@ -135,32 +127,19 @@ ylabel 'indice di gruppo'
 indiceTE220 = 6912; %220nm
 %profilo di campo TE 220nm
 
-x_TE=linspace(-700e-9,700e-9,1e3);
-% beta_TE_fix=1.064e7;%trovato con cursore
-% k_0=(2*pi)/(1.55e-6);
-% delta_fix=sqrt(beta_TE_fix^2 -(n_3^2 * k_0^2));
-% gamma_fix=sqrt(beta_TE_fix^2 -(n_2^2 * k_0^2));
-% kx_fix=sqrt((n_1^2*k_0^2)-(beta_TE_fix^2));
-% B=-(delta_fix)/(kx_fix);
+x_TE=linspace(-700e-9,700e-9,1e4);
+x_TE1 = x_TE(find(x_TE < -d));
+x_TE2 = x_TE(find(x_TE<=0 & x_TE>=-d));
+x_TE3 = x_TE(find(x_TE > 0));
+
 n_eff_fix = neff(indiceTE220);
-%delta_fix=sqrt(beta_TE_fix^2 -(n_3^2 * k_0^2));
 delta_fix = delta(indiceTE220);
-%gamma_fix=sqrt(beta_TE_fix^2 -(n_2^2 * k_0^2));
 gamma_fix = gamma(indiceTE220);
-%kx_fix=sqrt((n_1^2*k_0^2)-(beta_TE_fix^2));
 kx_fix = k_x(indiceTE220);
- B=-(delta_fix)/(kx_fix);
-for i=1:numel(x_TE)
-    if(x_TE(i)>0)
-        Ey_TE(i)= exp(-delta_fix.*x_TE(i));
-    end
-    if(x_TE(i)<=0 && x_TE(i)>=-d)
-        Ey_TE(i)= cos(kx_fix.*x_TE(i))+(B.*sin(kx_fix.*x_TE(i)));
-    end
-    if(x_TE(i) < -d)
-        Ey_TE(i)= (cos(kx_fix.*d)-(B.*sin(kx_fix.*d))).*exp(gamma_fix.*(x_TE(i)+d));
-    end
-end
+B=-(delta_fix)/(kx_fix);
+
+Ey_TE = [(cos(kx_fix.*d)-(B.*sin(kx_fix.*d))).*exp(gamma_fix.*(x_TE1+d)) cos(kx_fix.*x_TE2)+(B.*sin(kx_fix.*x_TE2)) exp(-delta_fix.*x_TE3)];
+
 zz = zeros(1,1000);
 x = linspace(0,2.7,1000);
 figure(9)
@@ -175,23 +154,16 @@ grid on
 
 %profilo di campo TM 220nm
 indiceTM220 = 2994;
-x_TM=linspace(-1100e-9,1100e-9,1e3);
+x_TM=linspace(-1100e-9,1100e-9,1e4);
+x_TM1 = x_TM(find(x_TM < -d));
+x_TM2 = x_TM(find(x_TM <= 0 & x_TM >= -d));
+x_TM3 = x_TM(find(x_TM > 0));
 n_eff_fix = neff(indiceTM220);
 delta_fix = delta(indiceTM220);
 gamma_fix = gamma(indiceTM220);
 kx_fix = k_x(indiceTM220);
 B=-(delta_fix*n_1^2)/(n_2^2*kx_fix);%porco il cazzo
-for i=1:numel(x_TM)
-    if(x_TM(i)>0)
-        Hy_TM(i)= exp(-delta_fix.*x_TM(i));
-    end
-    if(x_TM(i)<=0 && x_TM(i)>=-d)
-        Hy_TM(i)= cos(kx_fix.*x_TM(i))+(B.*sin(kx_fix.*x_TM(i)));
-    end
-    if(x_TM(i) < -d)
-        Hy_TM(i)= (cos(kx_fix.*d)-(B.*sin(kx_fix.*d))).*exp(gamma_fix.*(x_TM(i)+d));
-    end
-end
+Hy_TM = [(cos(kx_fix*d)-(B.*sin(kx_fix*d)))*exp(gamma_fix*(x_TM1+d)) cos(kx_fix*x_TM2)+B*sin(kx_fix*x_TM2) exp(-delta_fix*x_TM3)];
 
 int_norm_Hy_TM = abs(Hy_TM).^2./max(abs(Hy_TM).^2);
 
@@ -209,29 +181,23 @@ grid on
 %profilo di campo TE 150nm
 indiceTE150 = 5395; %150nm
 d = 150e-9;
+x_TE=linspace(-700e-9,700e-9,1e4);
+x_TE1 = x_TE(find(x_TE < -d));
+x_TE2 = x_TE(find(x_TE<=0 & x_TE>=-d));
+x_TE3 = x_TE(find(x_TE > 0));
 n_eff_fix = neff(indiceTE150);
 delta_fix = delta(indiceTE150);
 gamma_fix = gamma(indiceTE150);
 kx_fix = k_x(indiceTE150);
 B=-(delta_fix)/(kx_fix);
-for i=1:numel(x_TE)
-    if(x_TE(i)>0)
-        Ey_TE(i)= exp(-delta_fix.*x_TE(i));
-    end
-    if(x_TE(i)<=0 && x_TE(i)>=-d)
-        Ey_TE(i)= cos(kx_fix.*x_TE(i))+(B.*sin(kx_fix.*x_TE(i)));
-    end
-    if(x_TE(i) < -d)
-        Ey_TE(i)= (cos(kx_fix.*d)-(B.*sin(kx_fix.*d))).*exp(gamma_fix.*(x_TE(i)+d));
-    end
-end
+Ey_TE_150 = [(cos(kx_fix.*d)-(B.*sin(kx_fix.*d))).*exp(gamma_fix.*(x_TE1+d)), cos(kx_fix.*x_TE2)+(B.*sin(kx_fix.*x_TE2)), exp(-delta_fix.*x_TE3)];
 zz = zeros(1,1000);
 x = linspace(0,2,1000);
 
-int_norm_Ey_TE = abs(Ey_TE).^2./max(abs(Ey_TE).^2);
+int_norm_Ey_TE_150 = abs(Ey_TE_150).^2./max(abs(Ey_TE_150).^2);
 
 figure(11)
-plot(int_norm_Ey_TE, x_TE)
+plot(int_norm_Ey_TE_150, x_TE)
 hold on
 plot(x,zz)
 plot(x,zz-d)
@@ -241,30 +207,23 @@ grid on
 
 %profilo di campo TM 150nm
 indiceTM150 = 834;
-x_TM=linspace(-750e-9,750e-9,1e3);
+x_TM=linspace(-750e-9,750e-9,1e4);
+x_TM1 = x_TM(find(x_TM < -d));
+x_TM2 = x_TM(find(x_TM <= 0 & x_TM >= -d));
+x_TM3 = x_TM(find(x_TM > 0));
 n_eff_fix = neff(indiceTM150);
 delta_fix = delta(indiceTM150);
 gamma_fix = gamma(indiceTM150);
 kx_fix = k_x(indiceTM150);
 B=-(delta_fix*n_1^2)/(n_2^2*kx_fix);%porco il cazzo
-for i=1:numel(x_TM)
-    if(x_TM(i)>0)
-        Hy_TM(i)= exp(-delta_fix.*x_TM(i));
-    end
-    if(x_TM(i)<=0 && x_TM(i)>=-d)
-        Hy_TM(i)= cos(kx_fix.*x_TM(i))+(B.*sin(kx_fix.*x_TM(i)));
-    end
-    if(x_TM(i) < -d)
-        Hy_TM(i)= (cos(kx_fix.*d)-(B.*sin(kx_fix.*d))).*exp(gamma_fix.*(x_TM(i)+d));
-    end
-end
+Hy_TM_150 = [(cos(kx_fix*d)-(B.*sin(kx_fix*d)))*exp(gamma_fix*(x_TM1+d)) cos(kx_fix*x_TM2)+B*sin(kx_fix*x_TM2) exp(-delta_fix*x_TM3)];
 
-int_norm_Hy_TM = abs(Hy_TM).^2./max(abs(Hy_TM).^2);
+int_norm_Hy_TM_150 = abs(Hy_TM_150).^2./max(abs(Hy_TM_150).^2);
 
 figure(12)
 zz = zeros(1,1000);
 x = linspace(0,3,1000);
-plot(int_norm_Hy_TM, x_TM)
+plot(int_norm_Hy_TM_150, x_TM)
 hold on
 plot(x,zz)
 plot(x,zz-d)
@@ -273,7 +232,6 @@ xlim([0 1])
 grid on
 
 %Metodo ERI per analisi ridge
-
 n_coreERI = neff(indiceTE220);
 n_claddingERI = neff(indiceTE150);
 n_1ERI = n_coreERI;
@@ -287,24 +245,17 @@ k_xERI = k_0ERI.*sqrt(n_1ERI^2-neffERI.^2);
 gammaERI = k_0ERI*sqrt(neffERI.^2 - n_2ERI^2);
 d_TMERI =  (atan(gammaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)) + atan(deltaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)))./(k_xERI);
 omega_TMERI =  (3e8 * (atan(gammaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)) + atan(deltaERI.*n_1ERI^2./(k_xERI*n_2ERI^2))))./(dERI*sqrt(n_1ERI^2-neffERI.^2));
-x_TMERI=linspace(-1000e-9,500e-9,1e3);
+x_TMERI=linspace(-1000e-9,500e-9,1e4);
 indiceTMERI = 5274; %500nm
 n_eff_fixERI = neffERI(indiceTMERI);
 delta_fixERI = deltaERI(indiceTMERI);
 gamma_fixERI = gammaERI(indiceTMERI);
-kx_fixERI = k_xERI(indiceTMERI)
+kx_fixERI = k_xERI(indiceTMERI);
 BERI=-(delta_fixERI*n_1ERI^2)/(n_2ERI^2*kx_fixERI);%porco il cazzo
-for i=1:numel(x_TMERI)
-    if(x_TMERI(i)>0)
-        Hy_TMERI(i)= exp(-delta_fixERI.*x_TMERI(i));
-    end
-    if(x_TMERI(i)<=0 && x_TMERI(i)>=-dERI)
-        Hy_TMERI(i)= cos(kx_fixERI.*x_TMERI(i))+(BERI.*sin(kx_fixERI.*x_TMERI(i)));
-    end
-    if(x_TMERI(i) < -dERI)
-        Hy_TMERI(i)= (cos(kx_fixERI.*dERI)-(BERI.*sin(kx_fixERI.*dERI))).*exp(gamma_fixERI.*(x_TMERI(i)+dERI));
-    end
-end
+%Calcolo Hy per rami
+Hy_TMERI(find(x_TMERI > 0)) = exp(-delta_fixERI*x_TMERI(find(x_TMERI > 0)));
+Hy_TMERI(find(x_TMERI<=0 & x_TMERI>=-dERI))= cos(kx_fixERI.*x_TMERI(find(x_TMERI<=0 & x_TMERI>=-dERI)))+(BERI.*sin(kx_fixERI.*x_TMERI(find(x_TMERI<=0 & x_TMERI>=-dERI))));
+Hy_TMERI(find(x_TMERI < -dERI))= (cos(kx_fixERI.*dERI)-(BERI.*sin(kx_fixERI.*dERI))).*exp(gamma_fixERI.*(x_TMERI(find(x_TMERI < -dERI))+dERI));
 
 int_norm_Hy_TMERI = abs(Hy_TMERI).^2./max(abs(Hy_TMERI).^2);
 
@@ -322,18 +273,10 @@ xlim([0 1])
 
 omega_TEERI = 3e8*2*pi/lambda;
 epsi0 = 8.9e-12;
-
-for i=1:numel(Hy_TMERI)
-    if(x_TMERI(i)>0)
-        Ex_TMERI(i)= (kx_fixERI.*Hy_TMERI(i))./(omega_TEERI*epsi0*n_claddingERI^2);
-    end
-    if(x_TMERI(i)<=0 && x_TMERI(i)>=-dERI)
-        Ex_TMERI(i)= (kx_fixERI.*Hy_TMERI(i))./(omega_TEERI*epsi0*n_coreERI^2);
-    end
-    if(x_TMERI(i) < -dERI)
-        Ex_TMERI(i)= (kx_fixERI.*Hy_TMERI(i))./(omega_TEERI*epsi0*n_claddingERI^2);
-    end
-end
+Ex_TMERI = (kx_fixERI.*Hy_TMERI./(omega_TEERI*epsi0*n_claddingERI^2);
+%Ex_TMERI(find(x_TMERI > 0))=(kx_fixERI.*Hy_TMERI(find(x_TMERI > 0)))./(omega_TEERI*epsi0*n_claddingERI^2);
+%Ex_TMERI(find(x_TMERI<=0 & x_TMERI>=-dERI))= (kx_fixERI.*Hy_TMERI(find(x_TMERI<=0 & x_TMERI>=-dERI)))./(omega_TEERI*epsi0*n_coreERI^2);
+%Ex_TMERI(find(x_TMERI < -dERI))= (kx_fixERI.*Hy_TMERI(find(x_TMERI < -dERI)))./(omega_TEERI*epsi0*n_claddingERI^2);
 
 int_norm_Ex_TMERI = abs(Ex_TMERI).^2./max(abs(Ex_TMERI).^2);
 
@@ -344,16 +287,16 @@ zzERI = zeros(1,1000);
 xERI = linspace(0,5000,1000);
 plot(zzERI,xERI)
 plot(zzERI-dERI,xERI)
-title 'Plot del profilo del modo TM 500nm ERI Hy'
+title 'Plot del profilo del modo TM 500nm ERI Ex'
 grid on
 ylim([0 1])
 
-for i=1:numel(Ey_TE)
-    for j=1:numel(Ex_TMERI)
-        prodot(i,j)=Ey_TE(i)*Ex_TMERI(j);
-    end
-end
+prodot = Ey_TE'.*Ex_TMERI;
+prodot_norm = int_norm_Ey_TE'.*int_norm_Ex_TMERI;
 %FIXME Aggiungere contorno guida (matrice con tutti 0 e 100 (da vedere in base al colore) dove voglio vedere il contorno
 %FIXME Sistemare in modo da vederla simmetrica
 figure (15)
 imagesc(prodot)
+figure(16)
+imagesc(prodot_norm)
+toc

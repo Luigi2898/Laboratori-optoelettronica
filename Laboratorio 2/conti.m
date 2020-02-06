@@ -194,5 +194,3 @@ I_0 = 8.7; %mA 1.58 * I_th
 I_1 = 36.6; %mA 6.65 * I_th
 I_th_NRZ = 5.5001; %mA
 f_3dB = 4.0981; %GHz
-
-%FIXME Fare il conto delle zone in transitorio e a regime
