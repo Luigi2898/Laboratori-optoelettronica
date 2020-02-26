@@ -1,0 +1,38 @@
+lab 2 opto
+
+laser #1 
+
+A.2 : lo spettro visualizzato sull'OSA è quello del rumore interno dello strumento
+
+A.2 : settiamo una temperatura di 20° C e una corrente di 1.50 mA . Il range dello strumento permette una visualizzazione fino a 1700 nm.
+	  Lo spettro visualizzato presenta un picco a lambda = 1584.2 nm e Peak = -52.7 dBm
+	  
+	  
+B.1 : impostiamo la corrente di bias (input current laser) a 2mA. lambda = 1578.9 nm e Peak = -60.93 dBm . ricalcolando il picco di prima con queste impostazioni: -62.61 dBm
+	  Aumentiamo la input current fino a trovare una corrente di soglia pari a : 9.5 mA circa con un picco di -45.06 dBm--> dopo questo valore abbiamo un picco dovuto all'emissione spontanea alla lunghezza d'onda pari a 1531.6 nm
+	  L'accuratezza della misura della lunghezza d'onda è RB = 1 nm.
+	  
+	  
+C  : Impostiamo i valori suggeriti sulle slide. Notiamo che sullo strumento appare una scritta di UNCAL (non calibrazione) pertanto abbiamo diminuito la sensibilità verticale ed impostato uno swept time automatico (pari a 1.6 sec)
+	 abbiamo impostato la lunghezza d'onda centrale a 1531 nm.
+	 Il picco d'emissione si trova a 1531.49 nm ad una potenza di -23.96 dBm per una corrente in ingresso di 15.48 mA. 
+	 Scendiamo sotto la soglia per discutere la potenza dei modi longitudinali: 
+	 
+	 - I = 7.08 mA : abbiamo un picco alla lunghezza d'onda d'emissione (1532 nm. peak : -69dBm), a destra un picco a 1533.96 nm peak : -71.28 dBm, a sinistra un picco a 1530.81 nm peak -73 dBm
+	 - I = 10  mA : abbiamo un picco alla lunghezza d'onda d'emissione (1531.62 nm. peak : -53.96 dBm), a destra un picco a 1533.49 nm peak : -64.65 dBm, a sinistra un picco a 1530.29 nm peak -66 dBm
+	 - I = 15 mA : abbiamo un picco alla lunghezza d'onda d'emissione (1531.52 nm. peak : -23.8 dBm), a destra un picco a 1533.40 nm peak : -62.06 dBm, a sinistra un picco a 1530.15 nm peak -64.07 dBm	
+	 - I = 20 mA : abbiamo un picco alla lunghezza d'onda d'emissione (1531.56 nm. peak : -20.22 dBm), a destra un picco a 1533.42 nm peak : -61.98 dBm, a sinistra un picco a 1530.21 nm peak -63.87 dBm	 
+	 - I = 25 mA : abbiamo un picco alla lunghezza d'onda d'emissione (1531.60 nm. peak : -18.23 dBm), a destra un picco a 1533.45 nm peak : -61.68 dBm, a sinistra un picco a 1530.25 nm peak -63.40 dBm
+	 - I = 30 mA : abbiamo un picco alla lunghezza d'onda d'emissione (1531.62 nm. peak : -16.87 dBm), a destra un picco a 1533.44 nm peak : -61.30 dBm, a sinistra un picco a 1530.30 nm peak -63.00 dBm
+	 - I = 35 mA : abbiamo un picco alla lunghezza d'onda d'emissione (1531.64 nm. peak : -15.80 dBm), a destra un picco a 1533.45 nm peak : -61.07 dBm, a sinistra un picco a 1530.30 nm peak -62.80 dBm
+	 manca il calcolo dell SMSR
+	 
+D  : Impostiamo una corrente di 30 mA : lunghezza d'onda 1531.60 nm peak : -16.99 dBm. 
+	 Spegnendo il regolatore di temperatura la temperatura del laser sale : questo perché fissata la corrente il laser si scalderà fino a stabilizzarsi ad una temperatura di circa 29 °C. 
+	 lunghezza d'onda: 1532.24 nm peak: -18.77 dBm . E' diminuita la potenza a parità di corrente e il picco si è leggermente spostato in frequenza (abbassandosi).
+	 I_TE: corrente che circola nella cella di Peltier. Con TEC temperatura OFF: I_TEC = -0.010 A, accendendo il controllo di temperatura I_TEC = 0.085 A , sta raffreddando il laser fino a portare la temperatura a quella fissata (20 °C)
+	 Il modo in cui si comporta è quello teorico: se voglio raffreddare devo aumentare la corrente se voglio scaldare la devo diminuire.
+	 Cambiamo la temperatura: portando la temperatura a 30 °C e lasciando una corrente di 30.0 mA abbiamo una lunghezza d'onda: 1532.35 nm peak : -18.72 dBm
+	 
+
+E  : 	 
