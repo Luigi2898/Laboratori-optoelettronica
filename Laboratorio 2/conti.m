@@ -22,11 +22,17 @@ eta_i = 0.8; % � adimensionato
 A = 3.57e8;%secondi alla meno 1
 B = 0.8e-10;%cm^3/secondo
 C = 3.5e-30; % cm^6/secondo
-
+n_g = 4.2;
+c = 3e8;
+v_g = c/n_g;
 I_th = ((A*N_th + B*N_th^2 + C*N_th^3))*((q*V)/(eta_i));
-
+tau_p = 1/(v_g * (alpha_i_fix * 10^2 + alpha_m_fix * 10^2));
+beta_sp = 1e-4;
+I = 6e-3;
+Np = eta_i*(I - I_th)/(q * V * v_g * gamma_per_g_threshold/gamma);
+delta_nu = ((gamma^2*beta_sp)/(4*pi*Np))
 %ci manca la linewidth
-
+%%
 %esercizio 2
 
 La=linspace(300e-4,1500e-4,10000);
@@ -61,8 +67,8 @@ plot(La,eta_d,'r')
 grid on
 title('Plot efficienza differenziale in funzione della lunghezza')
 xlabel('La [cm]')
-ylabel('I_{th} [A]')
-
+ylabel('\eta_{d}')
+%%
 %Esercizio 3
 %riportare sullo stesso grafico le diverse risposte
 
