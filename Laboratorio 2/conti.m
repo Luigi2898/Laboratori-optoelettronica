@@ -22,7 +22,6 @@ eta_i = 0.8; % � adimensionato
 A = 3.57e8;%secondi alla meno 1
 B = 0.8e-10;%cm^3/secondo
 C = 3.5e-30; % cm^6/secondo
-
 I_th = ((A*N_th + B*N_th^2 + C*N_th^3))*((q*V)/(eta_i));
 n_g = 4.2;
 c = 3e8;
