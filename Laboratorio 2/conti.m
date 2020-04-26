@@ -24,9 +24,19 @@ B = 0.8e-10;%cm^3/secondo
 C = 3.5e-30; % cm^6/secondo
 
 I_th = ((A*N_th + B*N_th^2 + C*N_th^3))*((q*V)/(eta_i));
+n_g = 4.2;
+c = 3e8;
+v_g = c/n_g;
+I = 0.010;
+beta_sp = 1e-4;
+g_th = gamma_per_g_threshold/gamma;
+Np = eta_i*(I-I_th)/(q*V*v_g*g_th);
+Rsp_p = gamma*beta_sp*B*N_th^2;
+alpha_h = 1;
+linewidth = gamma*Rsp_p*(1+alpha_h)/(4*pi*Np)
 
 %ci manca la linewidth
-
+%%
 %esercizio 2
 
 La=linspace(300e-4,1500e-4,10000);
