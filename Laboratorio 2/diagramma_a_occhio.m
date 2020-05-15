@@ -3,16 +3,16 @@
 %Scommentare la riga della simulazione che si vuole analizzare
 %obj = openfig('esercizio_4_NRZ_1_1024');
 %obj = openfig('esercizio_4_NRZ_2_5_1024');
-obj = openfig('esercizio_4_NRZ_5_1024');
+%obj = openfig('esercizio_4_NRZ_5_1024');
 %obj = openfig('esercizio_4_NRZ_10_1024');
-%obj = openfig('esercizio_4_NRZ_20_1024');
+obj = openfig('esercizio_4_NRZ_20_1024');
 data = findobj(obj, 'type', 'line');
 
 tempo = get(data(1),'XData'); %ns
 potenza = get(data(1),'YData'); %mW
 
 %Cambiare in base alla simulazione scelta
-bitrate = 5e9; %bit/s
+bitrate = 20e9; %bit/s
 numb = 1024;
 Tbit = 1e9/bitrate; %ns
 %Calcolo la durata dello stream di simboli
@@ -29,7 +29,7 @@ potenza = potenza(I : numel(potenza));
 tempo = tempo - tempo(1);
 
 %Plot dello stream nel tempo
-figure(2)
+figure
 plot(tempo,potenza)
 grid on
 
@@ -41,10 +41,13 @@ for i = 0 : Tbit : tempo(end)
   [M Istart] = min((tempo - i).^2);
   %Trovo come prima l'indice un tempo di bit e mezzo dopo l'inizio della trasmissione del simbolo di interesse
   [M Istop] = min((tempo - (Tdisp + i)).^2);
-  figure(4)
+  figure(2)
   %Faccio il plot del diagramma simbolo per simbolo usando come riferimento sulle ascisse il tempo in cui è iniziata la trasmissione del simbolo
   %Per la potenza uso gli stessi indici (sono in parallelo)
-  plot(tempo(Istart : Istop) - tempo(Istart), potenza(Istart : Istop))
+  plot((tempo(Istart : Istop) - tempo(Istart))./Tbit, potenza(Istart : Istop))
   hold on
   grid on
+  xlim([0 1.5])
+  xlabel('t/T_{bit}')
+  ylabel('P_{out} [mW]')
 end

@@ -3,20 +3,20 @@ close all
 clear variables
 
 %esercizio 1
-%%
+
 r_1=0.3;
 r_2=0.9;
 La=900e-4;
 alpha_m_fix = (1/La)*(log(1/(sqrt(r_1*r_2)))); % rircordati che � cmetri^-1
 alpha_i_fix = 6; %unit� di misura cmetri^-1
-gamma_per_g_threshold = alpha_m_fix + alpha_i_fix;
+gamma_per_g_threshold_fix = alpha_m_fix + alpha_i_fix;
 N_tr = 1.8e18;%elettroni per centrimetro cubo
 a_0 =  5.34e-16; %sono cm^2
-guadagno_modale = a_0 * gamma_per_g_threshold;
+guadagno_modale = a_0 * gamma_per_g_threshold_fix;
 gamma = 0.06;
-N_th=N_tr + ((alpha_i_fix + alpha_m_fix) / (gamma * a_0));%elettroni per centrimetro cubo
-V = (900e-6)*(100e-10)*(2.5e-6); %metri al cubo
-V = V*1e6;%cm al cubo
+N_th_fix=N_tr + ((alpha_i_fix + alpha_m_fix) / (gamma * a_0));%elettroni per centrimetro cubo
+V_fix = (900e-6)*(100e-10)*(2.5e-6); %metri al cubo
+V_fix = V_fix*1e6;%cm al cubo
 q = 1.60217e-19;
 eta_i = 0.8; % � adimensionato
 A = 3.57e8;%secondi alla meno 1
@@ -25,28 +25,27 @@ C = 3.5e-30; % cm^6/secondo
 n_g = 4.2;
 c = 3e8;
 v_g = c/n_g;
-I_th = ((A*N_th + B*N_th^2 + C*N_th^3))*((q*V)/(eta_i));
-<<<<<<< HEAD
+I_th = ((A*N_th_fix + B*N_th_fix^2 + C*N_th_fix^3))*((q*V_fix)/(eta_i));
+
 n_g = 4.2;
 c = 3e8;
 v_g = c/n_g;
 I = 0.010;
 beta_sp = 1e-4;
-g_th = gamma_per_g_threshold/gamma;
-Np = eta_i*(I-I_th)/(q*V*v_g*g_th);
-Rsp_p = gamma*beta_sp*B*N_th^2;
-alpha_h = 1;
-linewidth = gamma*Rsp_p*(1+alpha_h)/(4*pi*Np)
+g_th = gamma_per_g_threshold_fix/gamma;
+Np = eta_i*(I-I_th)/(q*V_fix*v_g*g_th);
+Rsp_p = gamma*beta_sp*B*N_th_fix^2;
+alpha_h = 3;
+linewidth = gamma*Rsp_p*(1+alpha_h)^2/(4*pi*Np)
 
-=======
 tau_p = 1/(v_g * (alpha_i_fix * 10^2 + alpha_m_fix * 10^2));
 beta_sp = 1e-4;
 I = 6e-3;
-Np = eta_i*(I - I_th)/(q * V * v_g * gamma_per_g_threshold/gamma);
-delta_nu = ((gamma^2*beta_sp)/(4*pi*Np))
->>>>>>> 7686accdba76bc72180a4a2ecc62d008d5b04f42
+Np = eta_i*(I - I_th)/(q * V_fix * v_g * gamma_per_g_threshold_fix/gamma);
+delta_nu = ((gamma^2*beta_sp)/(4*pi*Np));
+
 %ci manca la linewidth
-%%
+
 %esercizio 2
 
 La=linspace(300e-4,1500e-4,10000);
@@ -82,7 +81,7 @@ grid on
 title('Plot efficienza differenziale in funzione della lunghezza')
 xlabel('La [cm]')
 ylabel('\eta_{d}')
-%%
+
 %Esercizio 3
 %riportare sullo stesso grafico le diverse risposte
 
@@ -109,7 +108,7 @@ t10 = findobj(h10,'type', 'line');
 
 x10 = get(t10,'XData');
 y10 = get(t10,'YData');
-
+close all
 figure(3)
 semilogx(x1_05, y1_05, 'b')
 grid on
@@ -131,10 +130,6 @@ I_th_fix = 9.677; %mA
 Ibias = [I_th_fix*1.05 I_th_fix*2 I_th_fix*6 I_th_fix*10];
 f_3dB = [f1_05_3dB f2_3dB f6_3dB f10_3dB];
 
-figure(4)
-plot(Ibias, f_3dB, '-o')
-grid on
-
 %Banda di modulazione massima
 n_g = 4.2;
 c = 3e8;
@@ -142,9 +137,18 @@ v_g = c/n_g;
 tau_p = 1/(v_g * (alpha_i_fix * 10^2 + alpha_m_fix * 10^2));
 banda_max_ideale = sqrt(2)/(tau_p * 2 * pi);
 
-one_ov_tau_Dn = 2 * B * N_th + A + 3 * C * N_th;
-Np = 0; %FIXME Calcolare la densità di fotoni come funzione della corrente di bias
+one_ov_tau_Dn = 2 * B * N_th_fix + A + 3 * C * N_th_fix;
+Np = eta_i*(Ibias - I_th_fix)./(q * V_fix * v_g * gamma_per_g_threshold_fix/gamma); %FIXME Calcolare la densità di fotoni come funzione della corrente di bias
 damping = v_g * a_0 * Np + one_ov_tau_Dn;
+wr_square = (v_g*a_0*Np)./tau_p;
+wp_square = wr_square*(1-1/2*(damping/sqrt(wr_square)));
+w3dB = sqrt(wp_square + sqrt(wp_square.^2 + wr_square.^2));
+
+figure(4)
+plot(Ibias, f_3dB, '-o')
+grid on
+%hold on
+%plot(Ibias, w3dB./(2*pi)./1e9)
 
 %esercizio 3.4 (ricalcolo con epsilon = 1.5e-14)
 epsilon = 1.5e-14;
