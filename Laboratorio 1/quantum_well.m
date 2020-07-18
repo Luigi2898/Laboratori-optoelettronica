@@ -1,6 +1,6 @@
-%clear all
-%close all
-%clc
+clear all
+close all
+clc
 
 %TODO plot diagramma a bande
 
@@ -30,21 +30,21 @@ d1h = (1./k_xh).*(atan(gammah./k_xh)+ atan(deltah./k_xh)+pi); %nm
 x = 20 * ones(1, 50);
 y = linspace(0, 0.18, 50);
 
-figure(11)
+figure
 plot(d0e,Ee,'r',d1e,Ee,'b')
 title('E vs d - ELETTRONI')
 grid on
 xlim([0 100])
 
-figure(22)
+figure
 plot(d0h,Eh,'r',d1h,Eh,'b')
 title('E vs d - LACUNE')
 grid on
 xlim([0 100])
 
-figure(33)
+figure
 plot(d0h,Eh,'r',d1h,Eh,'b', d0e,Ee, 'g', d1e, Ee, 'm', x, y, '.-')
-title('E vs d - LACUNE')
+title('E vs d - ELETTRONI e LACUNE')
 grid on
 xlim([0 100])
 

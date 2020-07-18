@@ -127,7 +127,7 @@ ylabel 'indice di gruppo'
 indiceTE220 = 6912; %220nm
 %profilo di campo TE 220nm
 
-x_TE=linspace(-700e-9,700e-9,1e4);
+x_TE=linspace(-550e-9,380e-9,1e4);
 x_TE1 = x_TE(find(x_TE < -d));
 x_TE2 = x_TE(find(x_TE<=0 & x_TE>=-d));
 x_TE3 = x_TE(find(x_TE > 0));
@@ -181,7 +181,7 @@ grid on
 %profilo di campo TE 150nm
 indiceTE150 = 5395; %150nm
 d = 150e-9;
-x_TE=linspace(-700e-9,700e-9,1e4);
+x_TE=linspace(-575e-9,425e-9,1e4);
 x_TE1 = x_TE(find(x_TE < -d));
 x_TE2 = x_TE(find(x_TE<=0 & x_TE>=-d));
 x_TE3 = x_TE(find(x_TE > 0));
@@ -207,7 +207,7 @@ grid on
 
 %profilo di campo TM 150nm
 indiceTM150 = 834;
-x_TM=linspace(-750e-9,750e-9,1e4);
+x_TM=linspace(-575e-9,425e-9,1e4);
 x_TM1 = x_TM(find(x_TM < -d));
 x_TM2 = x_TM(find(x_TM <= 0 & x_TM >= -d));
 x_TM3 = x_TM(find(x_TM > 0));
@@ -245,7 +245,7 @@ k_xERI = k_0ERI.*sqrt(n_1ERI^2-neffERI.^2);
 gammaERI = k_0ERI*sqrt(neffERI.^2 - n_2ERI^2);
 d_TMERI =  (atan(gammaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)) + atan(deltaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)))./(k_xERI);
 omega_TMERI =  (3e8 * (atan(gammaERI.*n_1ERI^2./(k_xERI*n_2ERI^2)) + atan(deltaERI.*n_1ERI^2./(k_xERI*n_2ERI^2))))./(dERI*sqrt(n_1ERI^2-neffERI.^2));
-x_TMERI=linspace(-1000e-9,500e-9,1e4);
+x_TMERI=linspace(-1000e-9,500e-9,15000);
 indiceTMERI = 5274; %500nm
 n_eff_fixERI = neffERI(indiceTMERI);
 delta_fixERI = deltaERI(indiceTMERI);
@@ -293,10 +293,28 @@ ylim([0 1])
 
 prodot = Ey_TE'.*Ex_TMERI;
 prodot_norm = int_norm_Ey_TE'.*int_norm_Ex_TMERI;
+% guide = zeros(size(prodot));
+% prodot(5950:6050,:) = ones(101,numel(prodot(1,:)));
+% prodot(5950-1500:6050-1500,1:5000) = ones(101,5000);
+% prodot(5950-2200:6050-2200,5001:10000) = ones(101,5000);
+% prodot(5950-1500:6050-1500,10001:15000) = ones(101,5000);
+% prodot(3750:4550,4950:5050) = ones(801,101);
+% prodot(3750:4550,4950+5000:5050+5000) = ones(801,101);
+
+prodot_norm(5950:6050,:) = ones(101,numel(prodot(1,:))).*0.5;
+ prodot_norm(5950-1500:6050-1500,1:5000) = ones(101,5000).*0.5;
+ prodot_norm(5950-2200:6050-2200,5001:10000) = ones(101,5000).*0.5;
+ prodot_norm(5950-1500:6050-1500,10001:15000) = ones(101,5000).*0.5;
+ prodot_norm(3750:4550,4950:5050) = ones(801,101).*0.5;
+ prodot_norm(3750:4550,4950+5000:5050+5000) = ones(801,101).*0.5;
 %FIXME Aggiungere contorno guida (matrice con tutti 0 e 100 (da vedere in base al colore) dove voglio vedere il contorno
 %FIXME Sistemare in modo da vederla simmetrica
 figure (15)
 imagesc(prodot)
 figure(16)
 imagesc(prodot_norm)
+
+%figure
+%mesh(x_TMERI, x_TE, prodot_norm)
+
 toc
